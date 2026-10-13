@@ -15,9 +15,9 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ## Установка
 
 ```bash
-yarn add foxy-ui-kit@github:nia-sempai/foxy-ui-kit#v0.2.0
+yarn add foxy-ui-kit@github:nia-sempai/foxy-ui-kit#v0.2.1
 # или
-npm install github:nia-sempai/foxy-ui-kit#v0.2.0
+npm install github:nia-sempai/foxy-ui-kit#v0.2.1
 ```
 
 Пакет ставится из репозитория: скрипт `prepare` собирает `dist/`. Публикация
@@ -185,6 +185,10 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.2.1
+
+- `FxTabs`: у пункта появился `hint` — пояснение второй строкой под названием.
 
 ## Что изменилось в 0.2.0
 

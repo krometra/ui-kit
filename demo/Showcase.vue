@@ -77,6 +77,7 @@ function toggleScheme() {
   theme.value.scheme = theme.value.scheme === 'dark' ? 'light' : 'dark'
 }
 const tab = ref('all')
+const hintedTab = ref('profile')
 const view = ref('table')
 const page = ref(1)
 const standalonePage = ref(3)
@@ -481,6 +482,19 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
             </FxPage>
           </FxShell>
         </div>
+      </section>
+
+      <!-- Вкладки -->
+      <section class="showcase__section">
+        <h2 class="showcase__title">Вкладки с пояснением</h2>
+        <FxTabs
+          v-model="hintedTab"
+          :items="[
+            { value: 'profile', label: 'Профиль', hint: 'Заполняет сотрудник', icon: 'user' },
+            { value: 'access', label: 'Доступы', hint: 'Выдаёт администратор', count: 3 },
+            { value: 'history', label: 'История', hint: 'Ведётся автоматически' },
+          ]"
+        />
       </section>
 
       <!-- Прочее -->
