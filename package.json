@@ -1,6 +1,6 @@
 {
   "name": "foxy-ui-kit",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "UI-kit на Vue 3 со сменными темами, светлой и тёмной схемой; интерактивные компоненты на zag.js",
   "license": "MIT",
   "type": "module",

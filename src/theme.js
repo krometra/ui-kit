@@ -250,6 +250,9 @@ export function buildTheme(theme = {}) {
     ...(spec.neutral ? {} : preset.neutralOverrides?.[scheme]),
     ...(spec.bg ? { bg: spec.bg } : {}),
     ...(spec.surface ? { surface: spec.surface } : {}),
+    ...(spec.text ? { text: spec.text } : {}),
+    ...(spec.textMuted ? { textMuted: spec.textMuted } : {}),
+    ...(spec.textFaint ? { textFaint: spec.textFaint } : {}),
   }
   const radius = radiusScales[spec.radius] ?? radiusScales.default
   const density = densities[spec.density] ?? densities.default

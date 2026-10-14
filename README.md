@@ -15,9 +15,9 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ## Установка
 
 ```bash
-yarn add foxy-ui-kit@github:nia-sempai/foxy-ui-kit#v0.2.1
+yarn add foxy-ui-kit@github:nia-sempai/foxy-ui-kit#v0.2.2
 # или
-npm install github:nia-sempai/foxy-ui-kit#v0.2.1
+npm install github:nia-sempai/foxy-ui-kit#v0.2.2
 ```
 
 Пакет ставится из репозитория: скрипт `prepare` собирает `dist/`. Публикация
@@ -65,6 +65,7 @@ import { applyTheme } from 'foxy-ui-kit'
 applyTheme('violet')                                    // готовый пресет
 applyTheme({ preset: 'ocean', radius: 'sharp' })        // пресет с правками
 applyTheme({ accent: '#e11d48', density: 'compact' })   // свой акцент
+applyTheme({ preset: 'ocean', textMuted: '#5b6472' })   // свой цвет вторичного текста
 applyTheme({ preset: 'scanflow', scheme: 'dark' })      // тёмная схема
 const stop = applyTheme({ scheme: 'system' })           // следовать за ОС
 ```
@@ -78,6 +79,7 @@ const stop = applyTheme({ scheme: 'system' })           // следовать з
 | `density` | `compact`, `default`, `comfortable` |
 | `elevation` | `flat`, `default`, `lifted` |
 | `font` | `system`, `grotesk`, `serif`, `mono` или своя строка |
+| `bg`, `surface`, `text`, `textMuted`, `textFaint` | свой цвет фона, поверхности и текста поверх нейтральной палитры (hex) |
 
 Не заданные оси наследуются из `tokens.css`, поэтому частичная тема — обычный
 способ настройки. `applyTheme` выставляет `data-fx-scheme` и `color-scheme` на
@@ -185,6 +187,12 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.2.2
+
+- `applyTheme`/`buildTheme`: опции `text`, `textMuted` и `textFaint` задают цвета текста
+  поверх нейтральной палитры, как `bg` и `surface`. Нужны, когда фон приложения темнее
+  палитры кита и вторичный текст на нём теряет контраст.
 
 ## Что изменилось в 0.2.1
 
