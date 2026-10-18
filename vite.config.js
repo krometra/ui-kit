@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // Библиотечная сборка: Vue вынесен в externals, стили собираются в один
-// foxy-ui-kit.css. Дев-сервер (`npm run dev`) поднимает demo/ — витрину.
+// ui-kit.css. Дев-сервер (`npm run dev`) поднимает demo/ — витрину.
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -13,7 +13,7 @@ export default defineConfig({
     lib: {
       entry: fileURLToPath(new URL('./src/index.js', import.meta.url)),
       name: 'TenderUiKit',
-      fileName: 'foxy-ui-kit',
+      fileName: 'ui-kit',
     },
     rollupOptions: {
       external: ['vue'],

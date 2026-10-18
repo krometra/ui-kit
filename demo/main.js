@@ -2,12 +2,12 @@
  * Точка входа витрины компонентов. Демо намеренно не использует роутер:
  * это одна прокручиваемая страница-каталог.
  *
- * Компоненты кита (FxShell, FxPage, FxMenuItem) ссылаются на <router-link>,
+ * Компоненты кита (KShell, KPage, KMenuItem) ссылаются на <router-link>,
  * потому что в приложении навигация идёт через vue-router. Чтобы не тащить
  * роутер в витрину, регистрируем лёгкую заглушку, рендерящую обычную ссылку.
  */
 import { createApp, h } from 'vue'
-import FoxyUiKit from '../src/index.js'
+import KrometraUiKit from '../src/index.js'
 import '../src/base.css'
 import Showcase from './Showcase.vue'
 
@@ -24,4 +24,4 @@ const RouterLinkStub = {
   },
 }
 
-createApp(Showcase).component('RouterLink', RouterLinkStub).use(FoxyUiKit).mount('#app')
+createApp(Showcase).component('RouterLink', RouterLinkStub).use(KrometraUiKit).mount('#app')

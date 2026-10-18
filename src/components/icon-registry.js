@@ -133,7 +133,7 @@ export const iconRegistry = {
 
 /**
  * Расширяет реестр из приложения: registerIcons({ rescan: RotateCw }). Имена
- * действуют для всех компонентов кита, включая проп `icon` у FxButton.
+ * действуют для всех компонентов кита, включая проп `icon` у KButton.
  */
 export function registerIcons(icons) {
   Object.assign(iconRegistry, icons)

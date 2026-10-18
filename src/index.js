@@ -1,62 +1,62 @@
 /**
- * foxy-ui-kit — UI-kit на Vue 3 со сменными темами оформления и светлой /
+ * @krometra/ui-kit — UI-kit на Vue 3 со сменными темами оформления и светлой /
  * тёмной схемой. Интерактивные компоненты построены на машинах @zag-js.
  *
  * Точка входа: именованные экспорты компонентов + плагин для глобальной
  * регистрации. Стили токенов подключаются автоматически; базовый reset
- * (`foxy-ui-kit/src/base.css`) приложение импортирует само, чтобы кит не
+ * (`@krometra/ui-kit/src/base.css`) приложение импортирует само, чтобы кит не
  * навязывал глобальные правила.
  *
- *   import { FxButton, FxTable } from 'foxy-ui-kit'
- *   import 'foxy-ui-kit/style.css'
+ *   import { KButton, KTable } from '@krometra/ui-kit'
+ *   import '@krometra/ui-kit/style.css'
  *
  * либо всё сразу:
- *   import FoxyUiKit from 'foxy-ui-kit'
- *   app.use(FoxyUiKit)
+ *   import KrometraUiKit from '@krometra/ui-kit'
+ *   app.use(KrometraUiKit)
  */
 import './tokens.css'
 
-import FxAlert from './components/FxAlert.vue'
-import FxAvatar from './components/FxAvatar.vue'
-import FxBadge from './components/FxBadge.vue'
-import FxButton from './components/FxButton.vue'
-import FxCard from './components/FxCard.vue'
-import FxCheckbox from './components/FxCheckbox.vue'
-import FxCombobox from './components/FxCombobox.vue'
-import FxCountdown from './components/FxCountdown.vue'
-import FxDescriptions from './components/FxDescriptions.vue'
-import FxDropdown from './components/FxDropdown.vue'
-import FxEmpty from './components/FxEmpty.vue'
-import FxFileUpload from './components/FxFileUpload.vue'
-import FxFilterBar from './components/FxFilterBar.vue'
-import FxIcon from './components/FxIcon.vue'
-import FxInput from './components/FxInput.vue'
-import FxMenuItem from './components/FxMenuItem.vue'
-import FxModal from './components/FxModal.vue'
-import FxMoney from './components/FxMoney.vue'
-import FxPage from './components/FxPage.vue'
-import FxPagination from './components/FxPagination.vue'
-import FxProgress from './components/FxProgress.vue'
-import FxRadioGroup from './components/FxRadioGroup.vue'
-import FxSegmented from './components/FxSegmented.vue'
-import FxSelect from './components/FxSelect.vue'
-import FxShell from './components/FxShell.vue'
-import FxStat from './components/FxStat.vue'
-import FxSteps from './components/FxSteps.vue'
-import FxSwitch from './components/FxSwitch.vue'
-import FxTable from './components/FxTable.vue'
-import FxTabs from './components/FxTabs.vue'
-import FxTextarea from './components/FxTextarea.vue'
-import FxTimeline from './components/FxTimeline.vue'
-import FxToast from './components/FxToast.vue'
-import FxTooltip from './components/FxTooltip.vue'
+import KAlert from './components/KAlert.vue'
+import KAvatar from './components/KAvatar.vue'
+import KBadge from './components/KBadge.vue'
+import KButton from './components/KButton.vue'
+import KCard from './components/KCard.vue'
+import KCheckbox from './components/KCheckbox.vue'
+import KCombobox from './components/KCombobox.vue'
+import KCountdown from './components/KCountdown.vue'
+import KDescriptions from './components/KDescriptions.vue'
+import KDropdown from './components/KDropdown.vue'
+import KEmpty from './components/KEmpty.vue'
+import KFileUpload from './components/KFileUpload.vue'
+import KFilterBar from './components/KFilterBar.vue'
+import KIcon from './components/KIcon.vue'
+import KInput from './components/KInput.vue'
+import KMenuItem from './components/KMenuItem.vue'
+import KModal from './components/KModal.vue'
+import KMoney from './components/KMoney.vue'
+import KPage from './components/KPage.vue'
+import KPagination from './components/KPagination.vue'
+import KProgress from './components/KProgress.vue'
+import KRadioGroup from './components/KRadioGroup.vue'
+import KSegmented from './components/KSegmented.vue'
+import KSelect from './components/KSelect.vue'
+import KShell from './components/KShell.vue'
+import KStat from './components/KStat.vue'
+import KSteps from './components/KSteps.vue'
+import KSwitch from './components/KSwitch.vue'
+import KTable from './components/KTable.vue'
+import KTabs from './components/KTabs.vue'
+import KTextarea from './components/KTextarea.vue'
+import KTimeline from './components/KTimeline.vue'
+import KToast from './components/KToast.vue'
+import KTooltip from './components/KTooltip.vue'
 
 export {
-  FxAlert, FxAvatar, FxBadge, FxButton, FxCard, FxCheckbox, FxCombobox, FxCountdown,
-  FxDescriptions, FxDropdown, FxEmpty, FxFileUpload, FxFilterBar, FxIcon,
-  FxInput, FxMenuItem, FxModal, FxMoney, FxPage, FxPagination, FxProgress,
-  FxRadioGroup, FxSegmented, FxSelect, FxShell, FxStat, FxSteps, FxSwitch, FxTable,
-  FxTabs, FxTextarea, FxTimeline, FxToast, FxTooltip,
+  KAlert, KAvatar, KBadge, KButton, KCard, KCheckbox, KCombobox, KCountdown,
+  KDescriptions, KDropdown, KEmpty, KFileUpload, KFilterBar, KIcon,
+  KInput, KMenuItem, KModal, KMoney, KPage, KPagination, KProgress,
+  KRadioGroup, KSegmented, KSelect, KShell, KStat, KSteps, KSwitch, KTable,
+  KTabs, KTextarea, KTimeline, KToast, KTooltip,
 }
 
 export { iconNames, iconRegistry, registerIcons } from './components/icon-registry.js'
@@ -68,11 +68,11 @@ export { useToast, pushToast, dismissToast, toastStore } from './composables/use
 export * from './format.js'
 
 const components = {
-  FxAlert, FxAvatar, FxBadge, FxButton, FxCard, FxCheckbox, FxCombobox, FxCountdown,
-  FxDescriptions, FxDropdown, FxEmpty, FxFileUpload, FxFilterBar, FxIcon,
-  FxInput, FxMenuItem, FxModal, FxMoney, FxPage, FxPagination, FxProgress,
-  FxRadioGroup, FxSegmented, FxSelect, FxShell, FxStat, FxSteps, FxSwitch, FxTable,
-  FxTabs, FxTextarea, FxTimeline, FxToast, FxTooltip,
+  KAlert, KAvatar, KBadge, KButton, KCard, KCheckbox, KCombobox, KCountdown,
+  KDescriptions, KDropdown, KEmpty, KFileUpload, KFilterBar, KIcon,
+  KInput, KMenuItem, KModal, KMoney, KPage, KPagination, KProgress,
+  KRadioGroup, KSegmented, KSelect, KShell, KStat, KSteps, KSwitch, KTable,
+  KTabs, KTextarea, KTimeline, KToast, KTooltip,
 }
 
 export default {

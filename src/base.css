@@ -10,11 +10,11 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  font-family: var(--fx-font);
+  font-family: var(--k-font);
   font-size: 15px;
   line-height: 1.5;
-  color: var(--fx-text);
-  background: var(--fx-bg);
+  color: var(--k-text);
+  background: var(--k-bg);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -23,10 +23,10 @@ h1 { font-size: 1.5rem; font-weight: 650; letter-spacing: -0.01em; }
 h2 { font-size: 1.125rem; font-weight: 600; }
 h3 { font-size: 1rem; font-weight: 600; }
 
-a { color: var(--fx-primary); text-decoration: none; }
+a { color: var(--k-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-::selection { background: var(--fx-selection); }
+::selection { background: var(--k-selection); }
 
 /* Единый вид фокуса для клавиатуры во всём ките */
-:focus-visible { outline: 2px solid var(--fx-primary); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--k-primary); outline-offset: 2px; }

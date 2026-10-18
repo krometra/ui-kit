@@ -1,11 +1,11 @@
-# foxy-ui-kit
+# @krometra/ui-kit
 
 UI-kit на Vue 3 со сменными темами оформления, светлой и тёмной схемой.
 Интерактивные компоненты построены на машинах состояний [zag.js](https://zagjs.com):
 позиционирование, фокус-трап, клавиатурная навигация и ARIA приходят из машин,
 а не пишутся заново в каждом компоненте.
 
-**Витрина и конструктор темы: <https://nia-sempai.github.io/foxy-ui-kit/>**
+**Витрина и конструктор темы: <https://krometra.github.io/ui-kit/>**
 
 34 компонента, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
 своей темы. Разметка и поведение компонентов одни и те же, а стилистика
@@ -15,13 +15,12 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ## Установка
 
 ```bash
-yarn add foxy-ui-kit@github:nia-sempai/foxy-ui-kit#v0.2.2
-# или
-npm install github:nia-sempai/foxy-ui-kit#v0.2.2
+npm install @krometra/ui-kit
+# или из репозитория (скрипт `prepare` собирает `dist/`)
+npm install github:krometra/ui-kit#v0.3.0
 ```
 
-Пакет ставится из репозитория: скрипт `prepare` собирает `dist/`. Публикация
-в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
+Публикация в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
 
 ## Использование
 
@@ -29,18 +28,18 @@ npm install github:nia-sempai/foxy-ui-kit#v0.2.2
 
 ```js
 import { createApp } from 'vue'
-import FoxyUiKit from 'foxy-ui-kit'
-import 'foxy-ui-kit/style.css'
+import KrometraUiKit from '@krometra/ui-kit'
+import '@krometra/ui-kit/style.css'
 import App from './App.vue'
 
-createApp(App).use(FoxyUiKit).mount('#app')
+createApp(App).use(KrometraUiKit).mount('#app')
 ```
 
 Точечно (tree-shaking):
 
 ```vue
 <script setup>
-import { FxButton, FxTable, FxMoney } from 'foxy-ui-kit'
+import { KButton, KTable, KMoney } from '@krometra/ui-kit'
 </script>
 ```
 
@@ -48,19 +47,19 @@ import { FxButton, FxTable, FxMoney } from 'foxy-ui-kit'
 правила приложению:
 
 ```js
-import 'foxy-ui-kit/src/base.css'
+import '@krometra/ui-kit/src/base.css'
 ```
 
-Уведомления требуют один `<FxToast />` в корне приложения; дальше сообщения
+Уведомления требуют один `<KToast />` в корне приложения; дальше сообщения
 шлются из любого места через `useToast()`.
 
 ## Темы
 
-Тема — это набор значений для переменных `--fx-*`. Меняется в рантайме, без
+Тема — это набор значений для переменных `--k-*`. Меняется в рантайме, без
 пересборки стилей.
 
 ```js
-import { applyTheme } from 'foxy-ui-kit'
+import { applyTheme } from '@krometra/ui-kit'
 
 applyTheme('violet')                                    // готовый пресет
 applyTheme({ preset: 'ocean', radius: 'sharp' })        // пресет с правками
@@ -82,32 +81,32 @@ const stop = applyTheme({ scheme: 'system' })           // следовать з
 | `bg`, `surface`, `text`, `textMuted`, `textFaint` | свой цвет фона, поверхности и текста поверх нейтральной палитры (hex) |
 
 Не заданные оси наследуются из `tokens.css`, поэтому частичная тема — обычный
-способ настройки. `applyTheme` выставляет `data-fx-scheme` и `color-scheme` на
+способ настройки. `applyTheme` выставляет `data-k-scheme` и `color-scheme` на
 `<html>` и возвращает функцию отката; при `scheme: 'system'` она же снимает
 подписку на смену системной темы.
 
 Тёмная схема работает и без JavaScript: достаточно атрибута
-`<html data-fx-scheme="dark">` — значения для неё лежат в `tokens.css`.
+`<html data-k-scheme="dark">` — значения для неё лежат в `tokens.css`.
 
 Для статической темы удобнее сгенерировать CSS один раз:
 
 ```js
-import { themeToCss } from 'foxy-ui-kit'
-themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --fx-primary: … }'
+import { themeToCss } from '@krometra/ui-kit'
+themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --k-primary: … }'
 ```
 
 Отдельные переменные всегда можно переопределить руками:
 
 ```css
 :root {
-  --fx-primary: #0f62fe;
-  --fx-radius: 10px;
+  --k-primary: #0f62fe;
+  --k-radius: 10px;
 }
 ```
 
-Помимо базовых цветов у каждого статуса есть полный набор: `--fx-success`,
+Помимо базовых цветов у каждого статуса есть полный набор: `--k-success`,
 `-hover`, `-soft` (фон плашек), `-strong` (текст на мягком фоне) и
-`--fx-on-success` (текст на заливке). Компоненты не содержат захардкоженных
+`--k-on-success` (текст на заливке). Компоненты не содержат захардкоженных
 цветов, поэтому любая схема перекрашивает их целиком.
 
 `tokens.css` генерируется из `theme.js` командой `yarn tokens`.
@@ -116,17 +115,17 @@ themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --fx-primary: … 
 
 | Группа | Компоненты |
 |---|---|
-| Каркас | `FxShell`, `FxPage`, `FxCard`, `FxTabs`, `FxSegmented` |
-| Формы | `FxInput`, `FxTextarea`, `FxSelect`, `FxCombobox`, `FxCheckbox`, `FxRadioGroup`, `FxSwitch`, `FxFileUpload` |
-| Действия | `FxButton`, `FxDropdown`, `FxMenuItem` |
-| Данные | `FxTable`, `FxPagination`, `FxDescriptions`, `FxTimeline`, `FxEmpty` |
-| Статусы | `FxBadge`, `FxAlert`, `FxStat`, `FxProgress`, `FxSteps`, `FxToast` |
-| Значения | `FxMoney`, `FxCountdown`, `FxAvatar`, `FxFilterBar` |
-| Прочее | `FxIcon`, `FxModal`, `FxTooltip` |
+| Каркас | `KShell`, `KPage`, `KCard`, `KTabs`, `KSegmented` |
+| Формы | `KInput`, `KTextarea`, `KSelect`, `KCombobox`, `KCheckbox`, `KRadioGroup`, `KSwitch`, `KFileUpload` |
+| Действия | `KButton`, `KDropdown`, `KMenuItem` |
+| Данные | `KTable`, `KPagination`, `KDescriptions`, `KTimeline`, `KEmpty` |
+| Статусы | `KBadge`, `KAlert`, `KStat`, `KProgress`, `KSteps`, `KToast` |
+| Значения | `KMoney`, `KCountdown`, `KAvatar`, `KFilterBar` |
+| Прочее | `KIcon`, `KModal`, `KTooltip` |
 
-На zag.js: `FxSelect`, `FxCombobox`, `FxDropdown`, `FxModal`, `FxToast`,
-`FxPagination`, `FxTooltip`, `FxTabs`, `FxCheckbox`, `FxSwitch`, `FxRadioGroup`,
-`FxSegmented`, `FxFileUpload`, `FxProgress`, `FxSteps`. Плавающие слои
+На zag.js: `KSelect`, `KCombobox`, `KDropdown`, `KModal`, `KToast`,
+`KPagination`, `KTooltip`, `KTabs`, `KCheckbox`, `KSwitch`, `KRadioGroup`,
+`KSegmented`, `KFileUpload`, `KProgress`, `KSteps`. Плавающие слои
 (списки, меню, подсказки, модалки) рендерятся в `<body>`, поэтому не
 обрезаются контейнерами с `overflow` и корректно ложатся друг на друга:
 модалка 1000, списки и меню 1100, подсказки 1200, уведомления 1300.
@@ -135,28 +134,28 @@ themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --fx-primary: … 
 
 ```vue
 <!-- select и combobox принимают любые объекты -->
-<FxSelect v-model="volumeId" :options="volumes" :get-value="v => v.id" :get-label="v => v.name" clearable />
-<FxCombobox v-model="counterpartyId" :options="counterparties" label="Контрагент" @search="load" />
+<KSelect v-model="volumeId" :options="volumes" :get-value="v => v.id" :get-label="v => v.name" clearable />
+<KCombobox v-model="counterpartyId" :options="counterparties" label="Контрагент" @search="load" />
 
 <!-- дропдаун: своя кнопка кита или собственный триггер со слотом -->
-<FxDropdown label="Экспорт" v-slot="{ close }">
-  <FxMenuItem icon="download">PDF</FxMenuItem>
-</FxDropdown>
-<FxDropdown>
-  <template #trigger="{ props }"><FxButton v-bind="props" variant="ghost" icon="more" /></template>
-  <FxMenuItem icon="edit">Редактировать</FxMenuItem>
-</FxDropdown>
+<KDropdown label="Экспорт" v-slot="{ close }">
+  <KMenuItem icon="download">PDF</KMenuItem>
+</KDropdown>
+<KDropdown>
+  <template #trigger="{ props }"><KButton v-bind="props" variant="ghost" icon="more" /></template>
+  <KMenuItem icon="edit">Редактировать</KMenuItem>
+</KDropdown>
 
 <!-- модалка не закрывается кликом по фону, пока не попросить -->
-<FxModal v-model="open" title="Новый документ" close-on-outside>…</FxModal>
+<KModal v-model="open" title="Новый документ" close-on-outside>…</KModal>
 ```
 
-Иконки задаются семантическим именем (`<FxIcon name="settings" />`). Своя
-иконка передаётся компонентом (`<FxIcon :component="MyIcon" />`) или
+Иконки задаются семантическим именем (`<KIcon name="settings" />`). Своя
+иконка передаётся компонентом (`<KIcon :component="MyIcon" />`) или
 регистрируется по имени, чтобы работать и в `icon`-пропах кнопок:
 
 ```js
-import { registerIcons } from 'foxy-ui-kit'
+import { registerIcons } from '@krometra/ui-kit'
 import { RotateCw } from 'lucide-vue-next'
 registerIcons({ rescan: RotateCw })
 ```
@@ -164,7 +163,7 @@ registerIcons({ rescan: RotateCw })
 ## Форматтеры
 
 ```js
-import { formatMoney, formatBytes, formatDuration, pluralize } from 'foxy-ui-kit'
+import { formatMoney, formatBytes, formatDuration, pluralize } from '@krometra/ui-kit'
 
 formatMoney(4850000)                                 // «4 850 000 ₽»
 formatBytes(482301)                                  // «471,0 КБ»
@@ -188,6 +187,14 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
 
+## Что изменилось в 0.3.0
+
+- Кит переехал в организацию Крометры: пакет `@krometra/ui-kit`, репозиторий
+  `github.com/krometra/ui-kit`. Прежний пакет `foxy-ui-kit` больше не выходит.
+- Префикс сменился на `K`: компоненты `KButton`, `KTable`…, классы `.k-*`,
+  CSS-переменные `--k-*`, плагин `KrometraUiKit`. Поведение и API компонентов
+  не менялись: переход — замена `Fx` на `K`, `fx-` на `k-` и имени пакета.
+
 ## Что изменилось в 0.2.2
 
 - `applyTheme`/`buildTheme`: опции `text`, `textMuted` и `textFaint` задают цвета текста
@@ -196,24 +203,24 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 ## Что изменилось в 0.2.1
 
-- `FxTabs`: у пункта появился `hint` — пояснение второй строкой под названием.
+- `KTabs`: у пункта появился `hint` — пояснение второй строкой под названием.
 
 ## Что изменилось в 0.2.0
 
 - Тёмная схема (`scheme: 'light' | 'dark' | 'system'`) и пресет `scanflow`.
-- Семантические токены `-hover`/`-strong`/`--fx-on-*`, `--fx-overlay`,
-  `--fx-tooltip-*`, `--fx-selection`; хардкод цветов из компонентов убран.
-- Интерактивные компоненты переведены на zag.js; добавлен `FxCombobox`.
-- `FxSelect`: пропы `getValue`/`getLabel`/`clearable`, значение в v-model
+- Семантические токены `-hover`/`-strong`/`--k-on-*`, `--k-overlay`,
+  `--k-tooltip-*`, `--k-selection`; хардкод цветов из компонентов убран.
+- Интерактивные компоненты переведены на zag.js; добавлен `KCombobox`.
+- `KSelect`: пропы `getValue`/`getLabel`/`clearable`, значение в v-model
   остаётся исходного типа; пустой `<option>` для плейсхолдера больше не нужен.
-- `FxDropdown`: слот `#trigger` получает `{ props, open }` и обязан привязать
+- `KDropdown`: слот `#trigger` получает `{ props, open }` и обязан привязать
   `props`; пропы `label`/`icon`/`variant`/`size` рисуют кнопку кита; слот по
   умолчанию получает `{ close }`.
-- `FxModal`: клик по фону не закрывает окно без `close-on-outside`.
-- `FxFileUpload`: в v-model объекты `File`, событие `reject`.
+- `KModal`: клик по фону не закрывает окно без `close-on-outside`.
+- `KFileUpload`: в v-model объекты `File`, событие `reject`.
 - `useToast`: очередь на `@zag-js/toast`; экспорт `toasts` заменён на
   `toastStore`; добавлен `loading`.
-- `FxAvatar` красится семантическими токенами вместо фиксированной палитры.
+- `KAvatar` красится семантическими токенами вместо фиксированной палитры.
 - `registerIcons()` и новые иконки: `rotate`, `scissors`, `restore`, `file-up`,
   `move`, `list`, `grid`, `sun`, `moon`.
 

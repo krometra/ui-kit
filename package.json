@@ -1,6 +1,6 @@
 {
-  "name": "foxy-ui-kit",
-  "version": "0.2.2",
+  "name": "@krometra/ui-kit",
+  "version": "0.3.0",
   "description": "UI-kit на Vue 3 со сменными темами, светлой и тёмной схемой; интерактивные компоненты на zag.js",
   "license": "MIT",
   "type": "module",
@@ -9,16 +9,16 @@
     "dist",
     "src"
   ],
-  "main": "./dist/foxy-ui-kit.umd.cjs",
-  "module": "./dist/foxy-ui-kit.js",
+  "main": "./dist/ui-kit.umd.cjs",
+  "module": "./dist/ui-kit.js",
   "exports": {
     ".": {
       "development": "./src/index.js",
-      "import": "./dist/foxy-ui-kit.js",
-      "require": "./dist/foxy-ui-kit.umd.cjs",
+      "import": "./dist/ui-kit.js",
+      "require": "./dist/ui-kit.umd.cjs",
       "default": "./src/index.js"
     },
-    "./style.css": "./dist/foxy-ui-kit.css",
+    "./style.css": "./dist/ui-kit.css",
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nia-sempai/foxy-ui-kit.git"
+    "url": "git+https://github.com/krometra/ui-kit.git"
   },
   "keywords": [
     "vue",

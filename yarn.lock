@@ -82,6 +82,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@krometra/ui-kit@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@krometra/ui-kit@workspace:."
+  dependencies:
+    "@vitejs/plugin-vue": "npm:^6.0.5"
+    "@zag-js/checkbox": "npm:^1.43.3"
+    "@zag-js/combobox": "npm:^1.43.3"
+    "@zag-js/dialog": "npm:^1.43.3"
+    "@zag-js/file-upload": "npm:^1.43.3"
+    "@zag-js/pagination": "npm:^1.43.3"
+    "@zag-js/popover": "npm:^1.43.3"
+    "@zag-js/progress": "npm:^1.43.3"
+    "@zag-js/radio-group": "npm:^1.43.3"
+    "@zag-js/select": "npm:^1.43.3"
+    "@zag-js/steps": "npm:^1.43.3"
+    "@zag-js/switch": "npm:^1.43.3"
+    "@zag-js/tabs": "npm:^1.43.3"
+    "@zag-js/toast": "npm:^1.43.3"
+    "@zag-js/tooltip": "npm:^1.43.3"
+    "@zag-js/vue": "npm:^1.43.3"
+    lucide-vue-next: "npm:^1.0.0"
+    vite: "npm:^8.0.1"
+    vue: "npm:^3.5.30"
+  peerDependencies:
+    vue: ^3.4.0
+  languageName: unknown
+  linkType: soft
+
 "@oxc-project/types@npm:=0.148.0":
   version: 0.148.0
   resolution: "@oxc-project/types@npm:0.148.0"
@@ -754,34 +782,6 @@ __metadata:
   checksum: 10c0/e345083c4306b3aed6cb8ec551e26c36bab5c511e99ea4576a16750ddc8d3240e63826cc624f5ae17ad4dc82e68a253213b60d556c11bfad064b7607847ed07f
   languageName: node
   linkType: hard
-
-"foxy-ui-kit@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "foxy-ui-kit@workspace:."
-  dependencies:
-    "@vitejs/plugin-vue": "npm:^6.0.5"
-    "@zag-js/checkbox": "npm:^1.43.3"
-    "@zag-js/combobox": "npm:^1.43.3"
-    "@zag-js/dialog": "npm:^1.43.3"
-    "@zag-js/file-upload": "npm:^1.43.3"
-    "@zag-js/pagination": "npm:^1.43.3"
-    "@zag-js/popover": "npm:^1.43.3"
-    "@zag-js/progress": "npm:^1.43.3"
-    "@zag-js/radio-group": "npm:^1.43.3"
-    "@zag-js/select": "npm:^1.43.3"
-    "@zag-js/steps": "npm:^1.43.3"
-    "@zag-js/switch": "npm:^1.43.3"
-    "@zag-js/tabs": "npm:^1.43.3"
-    "@zag-js/toast": "npm:^1.43.3"
-    "@zag-js/tooltip": "npm:^1.43.3"
-    "@zag-js/vue": "npm:^1.43.3"
-    lucide-vue-next: "npm:^1.0.0"
-    vite: "npm:^8.0.1"
-    vue: "npm:^3.5.30"
-  peerDependencies:
-    vue: ^3.4.0
-  languageName: unknown
-  linkType: soft
 
 "fsevents@npm:~2.3.3":
   version: 2.3.3

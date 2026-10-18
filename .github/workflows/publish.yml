@@ -1,9 +1,7 @@
 name: Publish package
 
-# Публикация по тегу v*. GitHub Packages принимает только scoped-имена
-# (@owner/name), а кит публикуется под коротким `foxy-ui-kit`, поэтому цель
-# одна — npm. Из репозитория пакет ставится и без публикации:
-# `yarn add foxy-ui-kit@github:nia-sempai/foxy-ui-kit` (dist собирает prepack).
+# Публикация в npm по тегу v*. Из репозитория пакет ставится и без публикации:
+# `yarn add @krometra/ui-kit@github:krometra/ui-kit` (dist собирает prepack).
 on:
   push:
     tags: ['v*']
@@ -49,8 +47,8 @@ jobs:
       # Артефакт нужен всегда: даже без публикации по тегу можно скачать
       # собранный пакет из вкладки Actions.
       - name: Pack tarball
-        run: yarn pack --out foxy-ui-kit-%v.tgz
+        run: yarn pack --out krometra-ui-kit-%v.tgz
       - uses: actions/upload-artifact@v4
         with:
           name: package
-          path: foxy-ui-kit-*.tgz
+          path: krometra-ui-kit-*.tgz

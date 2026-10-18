@@ -3,10 +3,10 @@
  *
  * Кит намеренно не привязан к одному фирменному стилю: под каждый проект
  * меняется палитра, скругления и плотность, а разметка и поведение компонентов
- * остаются теми же. Тема — это набор значений для CSS-переменных `--fx-*`,
+ * остаются теми же. Тема — это набор значений для CSS-переменных `--k-*`,
  * который применяется к любому элементу-контейнеру (обычно к :root).
  *
- *   import { applyTheme, themes } from 'foxy-ui-kit'
+ *   import { applyTheme, themes } from '@krometra/ui-kit'
  *   applyTheme('slate')                                  // готовый пресет
  *   applyTheme({ preset: 'ocean', radius: 'sharp', density: 'compact' })
  *   applyTheme({ accent: '#7c3aed' })                    // свой акцент
@@ -267,46 +267,46 @@ export function buildTheme(theme = {}) {
     ?? (dark ? mix(accent, neutral.surface, 0.22) : spec.accent ? tint(accent, 0.92) : preset.accentSoft)
 
   const vars = {
-    '--fx-primary': accent,
-    '--fx-primary-hover': accentHover,
-    '--fx-primary-soft': accentSoft,
-    '--fx-on-primary': onColor(accent),
+    '--k-primary': accent,
+    '--k-primary-hover': accentHover,
+    '--k-primary-soft': accentSoft,
+    '--k-on-primary': onColor(accent),
 
-    '--fx-bg': neutral.bg,
-    '--fx-surface': neutral.surface,
-    '--fx-surface-muted': neutral.surfaceMuted,
-    '--fx-border': neutral.border,
-    '--fx-border-strong': neutral.borderStrong,
-    '--fx-text': neutral.text,
-    '--fx-text-muted': neutral.textMuted,
-    '--fx-text-faint': neutral.textFaint,
+    '--k-bg': neutral.bg,
+    '--k-surface': neutral.surface,
+    '--k-surface-muted': neutral.surfaceMuted,
+    '--k-border': neutral.border,
+    '--k-border-strong': neutral.borderStrong,
+    '--k-text': neutral.text,
+    '--k-text-muted': neutral.textMuted,
+    '--k-text-faint': neutral.textFaint,
 
-    '--fx-overlay': dark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(15, 23, 42, 0.35)',
-    '--fx-tooltip-bg': dark ? neutral.text : '#172033',
-    '--fx-tooltip-text': dark ? neutral.bg : '#ffffff',
-    '--fx-selection': mix(accent, neutral.surface, dark ? 0.4 : 0.2),
+    '--k-overlay': dark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(15, 23, 42, 0.35)',
+    '--k-tooltip-bg': dark ? neutral.text : '#172033',
+    '--k-tooltip-text': dark ? neutral.bg : '#ffffff',
+    '--k-selection': mix(accent, neutral.surface, dark ? 0.4 : 0.2),
 
-    '--fx-radius-sm': radius.sm,
-    '--fx-radius': radius.md,
-    '--fx-radius-lg': radius.lg,
+    '--k-radius-sm': radius.sm,
+    '--k-radius': radius.md,
+    '--k-radius-lg': radius.lg,
 
-    '--fx-control-h': density.controlH,
-    '--fx-control-h-sm': density.controlHSm,
-    '--fx-gap': density.gap,
+    '--k-control-h': density.controlH,
+    '--k-control-h-sm': density.controlHSm,
+    '--k-gap': density.gap,
 
-    '--fx-shadow-sm': elevation.sm,
-    '--fx-shadow-md': elevation.md,
-    '--fx-shadow-lg': elevation.lg,
+    '--k-shadow-sm': elevation.sm,
+    '--k-shadow-md': elevation.md,
+    '--k-shadow-lg': elevation.lg,
 
-    '--fx-font': font,
+    '--k-font': font,
   }
 
   for (const [name, tone] of Object.entries(semantics[scheme])) {
-    vars[`--fx-${name}`] = tone.base
-    vars[`--fx-${name}-hover`] = tone.hover
-    vars[`--fx-${name}-soft`] = tone.soft ?? mix(tone.base, neutral.surface, 0.18)
-    vars[`--fx-${name}-strong`] = tone.strong
-    vars[`--fx-on-${name}`] = onColor(tone.base)
+    vars[`--k-${name}`] = tone.base
+    vars[`--k-${name}-hover`] = tone.hover
+    vars[`--k-${name}-soft`] = tone.soft ?? mix(tone.base, neutral.surface, 0.18)
+    vars[`--k-${name}-strong`] = tone.strong
+    vars[`--k-on-${name}`] = onColor(tone.base)
   }
 
   return vars
@@ -315,7 +315,7 @@ export function buildTheme(theme = {}) {
 /**
  * Применяет тему к элементу (по умолчанию к :root).
  *
- * Помимо переменных выставляет `data-fx-scheme` и `color-scheme`, чтобы
+ * Помимо переменных выставляет `data-k-scheme` и `color-scheme`, чтобы
  * нативные контролы и скроллбары следовали схеме. При `scheme: 'system'`
  * подписывается на смену системной темы. Возвращает функцию отката — удобно
  * для витрин и предпросмотра, где тема временная.
@@ -326,7 +326,7 @@ export function applyTheme(theme = {}, target = null) {
 
   const spec = typeof theme === 'string' ? { preset: theme } : theme
   const previous = {}
-  const previousScheme = el.getAttribute('data-fx-scheme')
+  const previousScheme = el.getAttribute('data-k-scheme')
   const previousColorScheme = el.style.colorScheme
 
   const paint = () => {
@@ -336,7 +336,7 @@ export function applyTheme(theme = {}, target = null) {
       el.style.setProperty(key, value)
     }
     const scheme = resolveScheme(spec.scheme)
-    el.setAttribute('data-fx-scheme', scheme)
+    el.setAttribute('data-k-scheme', scheme)
     el.style.colorScheme = scheme
   }
 
@@ -354,8 +354,8 @@ export function applyTheme(theme = {}, target = null) {
       if (value) el.style.setProperty(key, value)
       else el.style.removeProperty(key)
     }
-    if (previousScheme) el.setAttribute('data-fx-scheme', previousScheme)
-    else el.removeAttribute('data-fx-scheme')
+    if (previousScheme) el.setAttribute('data-k-scheme', previousScheme)
+    else el.removeAttribute('data-k-scheme')
     el.style.colorScheme = previousColorScheme
   }
 }
