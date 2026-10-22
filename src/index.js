@@ -25,6 +25,7 @@ import KCheckbox from './components/KCheckbox.vue'
 import KCombobox from './components/KCombobox.vue'
 import KCountdown from './components/KCountdown.vue'
 import KDescriptions from './components/KDescriptions.vue'
+import KDrawer from './components/KDrawer.vue'
 import KDropdown from './components/KDropdown.vue'
 import KEmpty from './components/KEmpty.vue'
 import KFileUpload from './components/KFileUpload.vue'
@@ -54,7 +55,7 @@ import KTooltip from './components/KTooltip.vue'
 
 export {
   KAlert, KAvatar, KBadge, KButton, KCard, KCheckbox, KCombobox, KCountdown,
-  KDescriptions, KDropdown, KEmpty, KFileUpload, KFilterBar, KGantt, KIcon,
+  KDescriptions, KDrawer, KDropdown, KEmpty, KFileUpload, KFilterBar, KGantt, KIcon,
   KInput, KMenuItem, KModal, KMoney, KPage, KPagination, KProgress,
   KRadioGroup, KSegmented, KSelect, KShell, KStat, KSteps, KSwitch, KTable,
   KTabs, KTextarea, KTimeline, KToast, KTooltip,
@@ -70,7 +71,7 @@ export * from './format.js'
 
 const components = {
   KAlert, KAvatar, KBadge, KButton, KCard, KCheckbox, KCombobox, KCountdown,
-  KDescriptions, KDropdown, KEmpty, KFileUpload, KFilterBar, KGantt, KIcon,
+  KDescriptions, KDrawer, KDropdown, KEmpty, KFileUpload, KFilterBar, KGantt, KIcon,
   KInput, KMenuItem, KModal, KMoney, KPage, KPagination, KProgress,
   KRadioGroup, KSegmented, KSelect, KShell, KStat, KSteps, KSwitch, KTable,
   KTabs, KTextarea, KTimeline, KToast, KTooltip,

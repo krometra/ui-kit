@@ -7,7 +7,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 
 **Витрина и конструктор темы: <https://krometra.github.io/ui-kit/>**
 
-35 компонентов, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
+36 компонентов, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
 своей темы. Разметка и поведение компонентов одни и те же, а стилистика
 подбирается под проект: цвет, нейтрали, скругления, плотность, тени и шрифт
 задаются CSS-переменными.
@@ -17,7 +17,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ```bash
 npm install @krometra/ui-kit
 # или из репозитория (скрипт `prepare` собирает `dist/`)
-npm install github:krometra/ui-kit#v0.4.1
+npm install github:krometra/ui-kit#v0.5.0
 ```
 
 Публикация в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
@@ -121,9 +121,9 @@ themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --k-primary: … }
 | Данные | `KTable`, `KPagination`, `KDescriptions`, `KTimeline`, `KGantt`, `KEmpty` |
 | Статусы | `KBadge`, `KAlert`, `KStat`, `KProgress`, `KSteps`, `KToast` |
 | Значения | `KMoney`, `KCountdown`, `KAvatar`, `KFilterBar` |
-| Прочее | `KIcon`, `KModal`, `KTooltip` |
+| Прочее | `KIcon`, `KModal`, `KDrawer`, `KTooltip` |
 
-На zag.js: `KSelect`, `KCombobox`, `KDropdown`, `KModal`, `KToast`,
+На zag.js: `KSelect`, `KCombobox`, `KDropdown`, `KModal`, `KDrawer`, `KToast`,
 `KPagination`, `KTooltip`, `KTabs`, `KCheckbox`, `KSwitch`, `KRadioGroup`,
 `KSegmented`, `KFileUpload`, `KProgress`, `KSteps`. Плавающие слои
 (списки, меню, подсказки, модалки) рендерятся в `<body>`, поэтому не
@@ -186,6 +186,15 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.5.0
+
+- `KDrawer` - боковая панель справа или слева на `@zag-js/dialog`. С `:modal="false"`
+  страница остаётся живой: можно кликать по списку и менять содержимое панели.
+- `KGantt`: проп `selected` подсвечивает строку задачи, клик по названию задачи
+  тоже отдаёт `item-click`.
+- `KCombobox`: поиск больше не сбрасывается, когда ввод сам открывает список
+  (терялась первая буква, вставленный текст не фильтровал).
 
 ## Что изменилось в 0.4.1
 

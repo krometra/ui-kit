@@ -85,8 +85,8 @@ const service = useMachine(combobox.machine, {
     const match = itemFor(props.modelValue)
     return match ? [keyOf(match)] : []
   },
-  onOpenChange() {
-    filtered.value = items.value
+  onOpenChange({ open }) {
+    if (!open) filtered.value = items.value
   },
   onInputValueChange({ inputValue }) {
     applyFilter(inputValue)

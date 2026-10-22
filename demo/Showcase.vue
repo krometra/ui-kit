@@ -84,6 +84,8 @@ const standalonePage = ref(3)
 const sortKey = ref('amount')
 const sortDir = ref('desc')
 const modal = ref(false)
+const drawer = ref(false)
+const ganttSelected = ref(null)
 const step = ref(1)
 
 const deadline = new Date(Date.now() + 3 * 3600 * 1000 + 12 * 60 * 1000)
@@ -471,7 +473,14 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
       <!-- Ганта -->
       <section class="showcase__section">
         <h2 class="showcase__title">Диаграмма Ганта</h2>
-        <KGantt :items="ganttItems" :groups="ganttGroups" :from="ganttDay(-7)" :to="ganttDay(14)">
+        <KGantt
+          :items="ganttItems"
+          :groups="ganttGroups"
+          :from="ganttDay(-7)"
+          :to="ganttDay(14)"
+          :selected="ganttSelected"
+          @item-click="ganttSelected = $event.key; drawer = true"
+        >
           <template #corner>Задача</template>
           <template #group="{ group }"><KAvatar :name="group.label" size="sm" />{{ group.label }}</template>
         </KGantt>
@@ -531,6 +540,7 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
         <KCard title="Модальное окно, подсказки и уведомления">
           <div class="showcase__row">
             <KButton variant="primary" @click="modal = true">Открыть модалку</KButton>
+            <KButton variant="secondary" icon="forward" @click="drawer = true">Боковая панель</KButton>
             <KButton variant="secondary" @click="toast.success('Сохранено', 'Изменения применены')">Успех</KButton>
             <KButton variant="secondary" @click="toast.warning('Требуется внимание', 'Тариф истекает через 3 дня')">Внимание</KButton>
             <KButton variant="secondary" @click="toast.error('Ошибка', 'Не удалось связаться с сервером')">Ошибка</KButton>
@@ -581,6 +591,30 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
         </KButton>
       </template>
     </KModal>
+
+    <KDrawer
+      v-model="drawer"
+      :modal="false"
+      :title="ganttItems.find(i => i.key === ganttSelected)?.code || 'PR-1042'"
+      :subtitle="ganttItems.find(i => i.key === ganttSelected)?.label || 'Платёжный шлюз'"
+      @close="ganttSelected = null"
+    >
+      <template #actions><KButton variant="ghost" size="sm" icon="external" title="Открыть" /></template>
+      <div class="showcase__stack">
+        <KAlert tone="info">Без затемнения: можно кликать по диаграмме, панель сменит задачу.</KAlert>
+        <KDescriptions
+          :columns="1"
+          :items="[
+            { key: 'who', label: 'Исполнитель', value: 'Анна Ковалёва' },
+            { key: 'status', label: 'Статус', value: 'В работе' },
+            { key: 'dates', label: 'Сроки', value: '20.10 - 24.10' },
+          ]"
+        />
+      </div>
+      <template #footer>
+        <KButton variant="ghost" @click="drawer = false">Закрыть</KButton>
+      </template>
+    </KDrawer>
 
     <KToast />
   </div>

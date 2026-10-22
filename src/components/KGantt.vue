@@ -12,6 +12,10 @@
  *   muted   — завершённая или неактуальная задача, полоса приглушена
  *   segments — несколько отрезков в одной строке (работа с перерывами)
  *   dayWidth — минимальная ширина дня в px; свободное место колонки дней делят поровну
+ *   selected — key выбранной задачи, её строка подсвечивается
+ *
+ * Клик по полосе или по названию задачи — событие item-click (у полосы с href
+ * открывается ссылка).
  *
  *   <KGantt :items="tasks" :groups="people" from="2026-10-19" to="2026-11-06"
  *           @item-click="open">
@@ -34,6 +38,7 @@ const props = defineProps({
   dayWidth: { type: Number, default: 56 },
   labelWidth: { type: String, default: '18rem' },
   emptyText: { type: String, default: 'Нет задач в этом периоде' },
+  selected: { type: [String, Number], default: null },
 })
 
 const emit = defineEmits(['item-click'])
@@ -161,13 +166,22 @@ function open(item) {
           </template>
 
           <template v-else>
-            <div class="k-gantt__label" :class="{ 'k-gantt__label--muted': row.item.muted }" :style="{ gridRow: r + 2 }">
+            <div
+              class="k-gantt__label k-gantt__label--item"
+              :class="{ 'k-gantt__label--muted': row.item.muted, 'k-gantt__label--selected': row.item.key === selected }"
+              :style="{ gridRow: r + 2 }"
+              role="button"
+              tabindex="0"
+              @click="open(row.item)"
+              @keydown.enter.prevent="open(row.item)"
+              @keydown.space.prevent="open(row.item)"
+            >
               <slot name="label" :item="row.item">
                 <span v-if="row.item.code" class="k-gantt__code">{{ row.item.code }}</span>
                 <span class="k-gantt__title">{{ row.item.label }}</span>
               </slot>
             </div>
-            <div class="k-gantt__track" :style="{ gridRow: r + 2 }">
+            <div class="k-gantt__track" :class="{ 'k-gantt__track--selected': row.item.key === selected }" :style="{ gridRow: r + 2 }">
               <div
                 v-for="(bar, b) in row.bars"
                 :key="b"
@@ -288,6 +302,11 @@ function open(item) {
   color: var(--k-text);
 }
 .k-gantt__label--muted { color: var(--k-text-faint); }
+.k-gantt__label--item { cursor: pointer; }
+.k-gantt__label--item:hover { background: var(--k-surface-muted); }
+.k-gantt__label--item:focus-visible { outline: 2px solid var(--k-primary); outline-offset: -2px; }
+.k-gantt__label--selected,
+.k-gantt__label--selected:hover { background: var(--k-primary-soft); box-shadow: inset 3px 0 0 var(--k-primary); }
 .k-gantt__label--group {
   padding-left: 0.5rem;
   border: none;
@@ -324,6 +343,7 @@ function open(item) {
   border-bottom: 1px solid var(--k-border);
 }
 .k-gantt__track--group { background: var(--k-surface-muted); }
+.k-gantt__track--selected { background: color-mix(in srgb, var(--k-primary-soft) 55%, transparent); }
 .k-gantt__summary {
   position: absolute;
   z-index: 1;
