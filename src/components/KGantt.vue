@@ -11,6 +11,7 @@
  *   tone    — 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'neutral'
  *   muted   — завершённая или неактуальная задача, полоса приглушена
  *   segments — несколько отрезков в одной строке (работа с перерывами)
+ *   dayWidth — минимальная ширина дня в px; свободное место колонки дней делят поровну
  *
  *   <KGantt :items="tasks" :groups="people" from="2026-10-19" to="2026-11-06"
  *           @item-click="open">
@@ -102,13 +103,16 @@ const rows = computed(() => {
 const gridStyle = computed(() => ({
   '--k-gantt-day-w': `${props.dayWidth}px`,
   '--k-gantt-label-w': props.labelWidth,
-  gridTemplateColumns: `var(--k-gantt-label-w) repeat(${days.value.length}, var(--k-gantt-day-w))`,
+  gridTemplateColumns: `var(--k-gantt-label-w) repeat(${days.value.length}, minmax(var(--k-gantt-day-w), 1fr))`,
 }))
 
-const barStyle = (bar) => ({
-  left: `calc(var(--k-gantt-day-w) * ${bar.first} + 3px)`,
-  width: `calc(var(--k-gantt-day-w) * ${bar.last - bar.first + 1} - 6px)`,
-})
+const barStyle = (bar) => {
+  const n = days.value.length
+  return {
+    left: `calc(${(bar.first / n) * 100}% + 3px)`,
+    width: `calc(${((bar.last - bar.first + 1) / n) * 100}% - 6px)`,
+  }
+}
 
 const dayLines = computed(() => {
   const marks = []
@@ -218,7 +222,7 @@ function open(item) {
   overflow: hidden;
 }
 .k-gantt__scroll { overflow: auto; max-height: inherit; }
-.k-gantt__grid { display: grid; grid-auto-rows: minmax(2.25rem, auto); position: relative; width: max-content; min-width: 100%; }
+.k-gantt__grid { display: grid; grid-auto-rows: minmax(2.25rem, auto); position: relative; min-width: max-content; }
 
 .k-gantt__corner,
 .k-gantt__day {
