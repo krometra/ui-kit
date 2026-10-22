@@ -112,6 +112,25 @@ const events = [
   { time: '11:05', title: 'Задача создана', text: 'Дмитрий Орлов', tone: 'warning', icon: 'add' },
 ]
 
+const ganttDay = (n) => {
+  const d = new Date(Date.now() + n * 86400000)
+  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
+}
+const ganttGroups = [
+  { key: 'anna', label: 'Анна Ковалёва' },
+  { key: 'sergey', label: 'Сергей Белов' },
+  { key: 'maria', label: 'Мария Титова' },
+]
+const ganttItems = [
+  { key: 'PR-1042', code: 'PR-1042', label: 'Платёжный шлюз', group: 'anna', start: ganttDay(-6), end: ganttDay(-2), tone: 'success', muted: true, hint: 'Готово' },
+  { key: 'PR-1048', code: 'PR-1048', label: 'Миграция токенов', group: 'anna', start: ganttDay(-1), end: ganttDay(4), hint: 'В работе' },
+  { key: 'PR-1051', code: 'PR-1051', label: 'Отчёт для бухгалтерии', group: 'anna', start: ganttDay(6), end: ganttDay(9), tone: 'neutral', hint: 'Запланировано' },
+  { key: 'PR-1039', code: 'PR-1039', label: 'Интеграция с CRM', group: 'sergey', segments: [{ start: ganttDay(-4), end: ganttDay(-2) }, { start: ganttDay(1), end: ganttDay(3) }], tone: 'warning', hint: 'Ждёт ответа партнёра' },
+  { key: 'PR-1044', code: 'PR-1044', label: 'Аудит доступов', group: 'sergey', start: ganttDay(4), end: ganttDay(12), tone: 'info' },
+  { key: 'PR-1035', code: 'PR-1035', label: 'Редизайн личного кабинета', group: 'maria', start: ganttDay(-10), end: ganttDay(2), tone: 'danger', hint: 'Срок сорван на 2 дня' },
+  { key: 'PR-1050', code: 'PR-1050', label: 'Онбординг', group: 'maria', start: ganttDay(3), end: ganttDay(7) },
+]
+
 const nav = [
   { items: [
     { label: 'Обзор', to: '/', icon: 'dashboard' },
@@ -447,6 +466,15 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
             </KEmpty>
           </KCard>
         </div>
+      </section>
+
+      <!-- Ганта -->
+      <section class="showcase__section">
+        <h2 class="showcase__title">Диаграмма Ганта</h2>
+        <KGantt :items="ganttItems" :groups="ganttGroups" :from="ganttDay(-7)" :to="ganttDay(14)">
+          <template #corner>Задача</template>
+          <template #group="{ group }"><KAvatar :name="group.label" size="sm" />{{ group.label }}</template>
+        </KGantt>
       </section>
 
       <!-- Каркас -->

@@ -7,7 +7,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 
 **Витрина и конструктор темы: <https://krometra.github.io/ui-kit/>**
 
-34 компонента, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
+35 компонентов, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
 своей темы. Разметка и поведение компонентов одни и те же, а стилистика
 подбирается под проект: цвет, нейтрали, скругления, плотность, тени и шрифт
 задаются CSS-переменными.
@@ -17,7 +17,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ```bash
 npm install @krometra/ui-kit
 # или из репозитория (скрипт `prepare` собирает `dist/`)
-npm install github:krometra/ui-kit#v0.3.0
+npm install github:krometra/ui-kit#v0.4.0
 ```
 
 Публикация в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
@@ -118,7 +118,7 @@ themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --k-primary: … }
 | Каркас | `KShell`, `KPage`, `KCard`, `KTabs`, `KSegmented` |
 | Формы | `KInput`, `KTextarea`, `KSelect`, `KCombobox`, `KCheckbox`, `KRadioGroup`, `KSwitch`, `KFileUpload` |
 | Действия | `KButton`, `KDropdown`, `KMenuItem` |
-| Данные | `KTable`, `KPagination`, `KDescriptions`, `KTimeline`, `KEmpty` |
+| Данные | `KTable`, `KPagination`, `KDescriptions`, `KTimeline`, `KGantt`, `KEmpty` |
 | Статусы | `KBadge`, `KAlert`, `KStat`, `KProgress`, `KSteps`, `KToast` |
 | Значения | `KMoney`, `KCountdown`, `KAvatar`, `KFilterBar` |
 | Прочее | `KIcon`, `KModal`, `KTooltip` |
@@ -186,6 +186,13 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.4.0
+
+- `KGantt` - диаграмма Ганта по дням: список задач слева, полосы сроков справа,
+  группы со сводной полосой и сворачиванием, отметка сегодняшнего дня,
+  выходные скрываются или затеняются, несколько отрезков в одной строке,
+  подсказка и ссылка у полосы.
 
 ## Что изменилось в 0.3.0
 
