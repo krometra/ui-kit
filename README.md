@@ -17,7 +17,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ```bash
 npm install @krometra/ui-kit
 # или из репозитория (скрипт `prepare` собирает `dist/`)
-npm install github:krometra/ui-kit#v0.6.0
+npm install github:krometra/ui-kit#v0.6.1
 ```
 
 Публикация в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
@@ -186,6 +186,11 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.6.1
+
+- `KInput`: `size="sm"` - компактное поле внутри строки текста или таблицы,
+  `inline` - подпись слева от поля.
 
 ## Что изменилось в 0.6.0
 

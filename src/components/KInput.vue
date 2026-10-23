@@ -7,6 +7,9 @@
  * inputmode, min, @blur, …) прокидываются на <input>.
  *
  *   <KInput v-model="query" label="Поиск" prefix-icon="search" :error="err" />
+ *
+ *   size   — 'md' (по умолчанию) | 'sm' — компактное поле внутри строки текста или таблицы
+ *   inline — подпись слева от поля, а не над ним
  */
 import { computed, useAttrs } from 'vue'
 import KIcon from './KIcon.vue'
@@ -37,13 +40,15 @@ defineProps({
   required: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
+  size: { type: String, default: 'md' },
+  inline: { type: Boolean, default: false },
 })
 
 defineEmits(['update:modelValue'])
 </script>
 
 <template>
-  <label class="k-input" v-bind="rootAttrs">
+  <label class="k-input" :class="[`k-input--${size}`, { 'k-input--inline': inline }]" v-bind="rootAttrs">
     <span v-if="label" class="k-input__label">
       {{ label }}<span v-if="required" class="k-input__req">*</span>
     </span>
@@ -105,4 +110,9 @@ defineEmits(['update:modelValue'])
 .k-input__suffix { font-size: 0.875rem; color: var(--k-text-muted); white-space: nowrap; }
 .k-input__hint { font-size: 0.75rem; color: var(--k-text-muted); }
 .k-input__error { font-size: 0.75rem; color: var(--k-danger); }
+.k-input--inline { flex-direction: row; align-items: center; gap: 0.4rem; }
+.k-input--inline .k-input__label { white-space: nowrap; }
+.k-input--sm .k-input__box { height: var(--k-control-h-sm); padding: 0 0.5rem; gap: 0.35rem; }
+.k-input--sm .k-input__field { font-size: 0.8125rem; }
+.k-input--sm .k-input__suffix { font-size: 0.8125rem; }
 </style>

@@ -83,6 +83,7 @@ const chipNorm = ref(true)
 const chipVariant = ref(false)
 const chipFound = ref(['отёк'])
 const chipOpen = ref(false)
+const chipTeeth = ref('')
 const page = ref(1)
 const standalonePage = ref(3)
 const sortKey = ref('amount')
@@ -305,6 +306,8 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
               </KChip>
               <KChip soft :expanded="chipOpen" :marked="chipFound.length > 0" @click="chipOpen = !chipOpen">Шкала</KChip>
               <KChip size="sm" icon="filter">Фильтр</KChip>
+              <KInput v-model="chipTeeth" size="sm" inline label="зубы:" placeholder="1.6, 2.6" style="width: 13rem" />
+              <KInput model-value="4" size="sm" inline label="размер до" suffix="мм" style="width: 11rem" />
             </div>
           </KCard>
         </div>
