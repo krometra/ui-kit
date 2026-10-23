@@ -27,7 +27,9 @@ export const schemes = ['light', 'dark', 'system']
  * чем держать десяток почти одинаковых палитр. Пресет может уточнить нейтрали
  * точечно через `neutralOverrides` — так живут проектные темы. Ещё пресет
  * может задать свои `radius`, `density`, `elevation` и `font`: они действуют,
- * пока ось не задана в теме явно.
+ * пока ось не задана в теме явно. `accentOverrides` и `semanticOverrides`
+ * по схемам (`light`, `dark`) задают акцент и цвета статусов точно, когда
+ * подобранная вручную палитра должна совпасть с макетом.
  */
 export const presets = {
   default: {
@@ -96,6 +98,51 @@ export const presets = {
     accentHover: '#000000',
     accentSoft: '#f4f4f5',
     neutral: 'plain',
+  },
+  bordeaux: {
+    label: 'Bordeaux',
+    accent: '#8a3a48',
+    accentHover: '#73303c',
+    accentSoft: '#f3e6e8',
+    neutral: 'warm',
+    font: "'Golos Text', -apple-system, 'Segoe UI', Roboto, sans-serif",
+    accentOverrides: {
+      dark: { accent: '#e3929e', accentHover: '#eaa9b3', accentSoft: '#33242a' },
+    },
+    semanticOverrides: {
+      light: {
+        success: { base: '#2c7656', hover: '#235f45', soft: '#e3f1ea', strong: '#2c7656' },
+        info: { base: '#3b6286', hover: '#2f4f6c', soft: '#e5edf5', strong: '#3b6286' },
+        danger: { base: '#b03a37', hover: '#922f2d', soft: '#fbe8e6', strong: '#b03a37' },
+      },
+      dark: {
+        success: { base: '#72c9a2', hover: '#8fd6b6', soft: '#1b3228', strong: '#72c9a2' },
+        info: { base: '#94b8db', hover: '#adc9e4', soft: '#1c2936', strong: '#94b8db' },
+        danger: { base: '#f08d83', hover: '#f4a69e', soft: '#3a2220', strong: '#f08d83' },
+      },
+    },
+    neutralOverrides: {
+      light: {
+        bg: '#f6f4f4',
+        surface: '#ffffff',
+        surfaceMuted: '#faf8f8',
+        border: '#e3dcdd',
+        borderStrong: '#cdc3c4',
+        text: '#1e2327',
+        textMuted: '#5f666c',
+        textFaint: '#959ca1',
+      },
+      dark: {
+        bg: '#15181b',
+        surface: '#1d2125',
+        surfaceMuted: '#24292e',
+        border: '#30353a',
+        borderStrong: '#454b52',
+        text: '#ebe7e7',
+        textMuted: '#a3a9ae',
+        textFaint: '#737a80',
+      },
+    },
   },
   blocky: {
     label: 'Blocky',
@@ -300,11 +347,12 @@ export function buildTheme(theme = {}) {
   const fontKey = spec.font ?? preset.font
   const font = fontStacks[fontKey] ?? fontKey ?? fontStacks.system
 
+  const own = spec.accent ? null : preset.accentOverrides?.[scheme]
   const baseAccent = spec.accent ?? preset.accent
-  const accent = dark ? tint(baseAccent, 0.12) : baseAccent
-  const accentHover = spec.accentHover
+  const accent = own?.accent ?? (dark ? tint(baseAccent, 0.12) : baseAccent)
+  const accentHover = spec.accentHover ?? own?.accentHover
     ?? (dark ? tint(accent, 0.14) : spec.accent ? shade(accent, -0.12) : preset.accentHover)
-  const accentSoft = spec.accentSoft
+  const accentSoft = spec.accentSoft ?? own?.accentSoft
     ?? (dark ? mix(accent, neutral.surface, 0.22) : spec.accent ? tint(accent, 0.92) : preset.accentSoft)
 
   const vars = {
@@ -342,7 +390,8 @@ export function buildTheme(theme = {}) {
     '--k-font': font,
   }
 
-  for (const [name, tone] of Object.entries(semantics[scheme])) {
+  const tones = { ...semantics[scheme], ...preset.semanticOverrides?.[scheme] }
+  for (const [name, tone] of Object.entries(tones)) {
     vars[`--k-${name}`] = tone.base
     vars[`--k-${name}-hover`] = tone.hover
     vars[`--k-${name}-soft`] = tone.soft ?? mix(tone.base, neutral.surface, 0.18)
