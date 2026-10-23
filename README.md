@@ -7,7 +7,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 
 **Витрина и конструктор темы: <https://krometra.github.io/ui-kit/>**
 
-36 компонентов, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
+37 компонентов, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
 своей темы. Разметка и поведение компонентов одни и те же, а стилистика
 подбирается под проект: цвет, нейтрали, скругления, плотность, тени и шрифт
 задаются CSS-переменными.
@@ -17,7 +17,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ```bash
 npm install @krometra/ui-kit
 # или из репозитория (скрипт `prepare` собирает `dist/`)
-npm install github:krometra/ui-kit#v0.5.0
+npm install github:krometra/ui-kit#v0.6.0
 ```
 
 Публикация в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
@@ -116,7 +116,7 @@ themeToCss({ preset: 'forest', radius: 'soft' })  // ':root { --k-primary: … }
 | Группа | Компоненты |
 |---|---|
 | Каркас | `KShell`, `KPage`, `KCard`, `KTabs`, `KSegmented` |
-| Формы | `KInput`, `KTextarea`, `KSelect`, `KCombobox`, `KCheckbox`, `KRadioGroup`, `KSwitch`, `KFileUpload` |
+| Формы | `KInput`, `KTextarea`, `KSelect`, `KCombobox`, `KCheckbox`, `KChip`, `KRadioGroup`, `KSwitch`, `KFileUpload` |
 | Действия | `KButton`, `KDropdown`, `KMenuItem` |
 | Данные | `KTable`, `KPagination`, `KDescriptions`, `KTimeline`, `KGantt`, `KEmpty` |
 | Статусы | `KBadge`, `KAlert`, `KStat`, `KProgress`, `KSteps`, `KToast` |
@@ -186,6 +186,13 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.6.0
+
+- `KChip` - кнопка-признак в виде таблетки: `v-model:pressed` для выбора,
+  тон нажатого (`success`, `info`, `danger`...), `soft` для кнопки-меню, `dashed`
+  для вторичного варианта, `expanded` рисует стрелку и ставит `aria-expanded`,
+  `marked` - точка «внутри что-то выбрано».
 
 ## Что изменилось в 0.5.0
 

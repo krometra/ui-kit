@@ -79,6 +79,10 @@ function toggleScheme() {
 const tab = ref('all')
 const hintedTab = ref('profile')
 const view = ref('table')
+const chipNorm = ref(true)
+const chipVariant = ref(false)
+const chipFound = ref(['отёк'])
+const chipOpen = ref(false)
 const page = ref(1)
 const standalonePage = ref(3)
 const sortKey = ref('amount')
@@ -286,6 +290,21 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
                 ]"
               />
               <KFileUpload v-model="files" />
+            </div>
+            <div class="showcase__row showcase__row--mt">
+              <KChip v-model:pressed="chipNorm" tone="success">норма</KChip>
+              <KChip v-model:pressed="chipVariant" tone="info" dashed>вариант нормы</KChip>
+              <KChip
+                v-for="f in ['отёк', 'гиперемия']"
+                :key="f"
+                tone="danger"
+                :pressed="chipFound.includes(f)"
+                @update:pressed="(on) => (chipFound = on ? [...chipFound, f] : chipFound.filter((x) => x !== f))"
+              >
+                {{ f }}
+              </KChip>
+              <KChip soft :expanded="chipOpen" :marked="chipFound.length > 0" @click="chipOpen = !chipOpen">Шкала</KChip>
+              <KChip size="sm" icon="filter">Фильтр</KChip>
             </div>
           </KCard>
         </div>

@@ -1,6 +1,6 @@
 {
   "name": "@krometra/ui-kit",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "UI-kit на Vue 3 со сменными темами, светлой и тёмной схемой; интерактивные компоненты на zag.js",
   "license": "MIT",
   "type": "module",
