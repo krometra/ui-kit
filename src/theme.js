@@ -25,7 +25,9 @@ export const schemes = ['light', 'dark', 'system']
  * Нейтрали задаются отдельно от акцента: одинаковый синий на холодном и на
  * тёплом сером выглядит как два разных бренда, и подбирать их порознь удобнее,
  * чем держать десяток почти одинаковых палитр. Пресет может уточнить нейтрали
- * точечно через `neutralOverrides` — так живут проектные темы.
+ * точечно через `neutralOverrides` — так живут проектные темы. Ещё пресет
+ * может задать свои `radius`, `density`, `elevation` и `font`: они действуют,
+ * пока ось не задана в теме явно.
  */
 export const presets = {
   default: {
@@ -94,6 +96,38 @@ export const presets = {
     accentHover: '#000000',
     accentSoft: '#f4f4f5',
     neutral: 'plain',
+  },
+  blocky: {
+    label: 'Blocky',
+    accent: '#4f8a25',
+    accentHover: '#3f711c',
+    accentSoft: '#e8f3dc',
+    neutral: 'warm',
+    radius: 'square',
+    elevation: 'hard',
+    font: 'rounded',
+    neutralOverrides: {
+      light: {
+        bg: '#e7e1d3',
+        surface: '#fbf8f1',
+        surfaceMuted: '#f1ebdf',
+        border: '#cdc3ae',
+        borderStrong: '#8a7a5c',
+        text: '#2b2418',
+        textMuted: '#675a43',
+        textFaint: '#9a8c72',
+      },
+      dark: {
+        bg: '#1b1814',
+        surface: '#27231d',
+        surfaceMuted: '#302b24',
+        border: '#443d32',
+        borderStrong: '#6b5f4c',
+        text: '#efe8da',
+        textMuted: '#b2a58c',
+        textFaint: '#7c715f',
+      },
+    },
   },
 }
 
@@ -193,6 +227,7 @@ export const radiusScales = {
   default: { sm: '6px', md: '8px', lg: '14px' },
   soft: { sm: '9px', md: '12px', lg: '20px' },
   pill: { sm: '12px', md: '16px', lg: '28px' },
+  square: { sm: '0px', md: '0px', lg: '0px' },
 }
 
 /** Плотность: высота контролов и базовый шаг. */
@@ -216,6 +251,10 @@ export const elevations = {
     light: { sm: '0 1px 3px rgba(15, 23, 42, 0.08)', md: '0 8px 24px rgba(15, 23, 42, 0.12)', lg: '0 24px 60px rgba(15, 23, 42, 0.20)' },
     dark: { sm: '0 1px 3px rgba(0, 0, 0, 0.45)', md: '0 8px 24px rgba(0, 0, 0, 0.55)', lg: '0 24px 60px rgba(0, 0, 0, 0.7)' },
   },
+  hard: {
+    light: { sm: '0 3px 0 rgba(43, 36, 24, 0.28)', md: '0 4px 0 rgba(43, 36, 24, 0.16)', lg: '0 8px 0 rgba(43, 36, 24, 0.22)' },
+    dark: { sm: '0 3px 0 rgba(0, 0, 0, 0.55)', md: '0 4px 0 rgba(0, 0, 0, 0.45)', lg: '0 8px 0 rgba(0, 0, 0, 0.6)' },
+  },
 }
 
 /** Шрифтовые пары. */
@@ -224,6 +263,7 @@ export const fontStacks = {
   grotesk: "'Inter', 'Segoe UI', system-ui, sans-serif",
   serif: "'Georgia', 'Times New Roman', serif",
   mono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace",
+  rounded: "ui-rounded, 'SF Pro Rounded', 'Nunito', 'Varela Round', 'Segoe UI', system-ui, sans-serif",
 }
 
 /** Сводит `system` к конкретной схеме по настройке ОС; вне браузера — light. */
@@ -254,10 +294,11 @@ export function buildTheme(theme = {}) {
     ...(spec.textMuted ? { textMuted: spec.textMuted } : {}),
     ...(spec.textFaint ? { textFaint: spec.textFaint } : {}),
   }
-  const radius = radiusScales[spec.radius] ?? radiusScales.default
-  const density = densities[spec.density] ?? densities.default
-  const elevation = (elevations[spec.elevation] ?? elevations.default)[scheme]
-  const font = fontStacks[spec.font] ?? spec.font ?? fontStacks.system
+  const radius = radiusScales[spec.radius ?? preset.radius] ?? radiusScales.default
+  const density = densities[spec.density ?? preset.density] ?? densities.default
+  const elevation = (elevations[spec.elevation ?? preset.elevation] ?? elevations.default)[scheme]
+  const fontKey = spec.font ?? preset.font
+  const font = fontStacks[fontKey] ?? fontKey ?? fontStacks.system
 
   const baseAccent = spec.accent ?? preset.accent
   const accent = dark ? tint(baseAccent, 0.12) : baseAccent

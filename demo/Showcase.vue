@@ -7,7 +7,7 @@
 import { computed, ref, watch } from 'vue'
 import {
   applyTheme, themes, themeToCss, iconNames,
-  densities, elevations, fontStacks, neutrals, radiusScales,
+  densities, elevations, fontStacks, neutrals, presets, radiusScales,
   useToast, formatBytes,
 } from '../src/index.js'
 
@@ -41,6 +41,19 @@ watch(
   },
   { immediate: true, deep: true },
 )
+
+const presetAxes = { radius: 'default', density: 'default', elevation: 'default', font: 'system' }
+
+function pickPreset(value) {
+  const prev = presets[theme.value.preset] ?? {}
+  const next = presets[value] ?? {}
+  for (const [axis, fallback] of Object.entries(presetAxes)) {
+    if (next[axis]) theme.value[axis] = next[axis]
+    else if (prev[axis] && theme.value[axis] === prev[axis]) theme.value[axis] = fallback
+  }
+  theme.value.preset = value
+  theme.value.accent = ''
+}
 
 const cssPreview = computed(() => themeToCss(themeSpec.value))
 
@@ -207,7 +220,7 @@ const optionsOf = (obj) => Object.keys(obj).map((k) => ({ value: k, label: k }))
               :key="t.value"
               class="showcase__preset"
               :class="{ 'showcase__preset--active': theme.preset === t.value && !theme.accent }"
-              @click="theme.preset = t.value; theme.accent = ''"
+              @click="pickPreset(t.value)"
             >
               <span class="showcase__preset-dot" :style="{ background: t.accent }" />
               {{ t.label }}

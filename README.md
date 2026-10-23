@@ -7,7 +7,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 
 **Витрина и конструктор темы: <https://krometra.github.io/ui-kit/>**
 
-37 компонентов, 88 иконок, девять готовых тем, две цветовые схемы и конструктор
+37 компонентов, 88 иконок, десять готовых тем, две цветовые схемы и конструктор
 своей темы. Разметка и поведение компонентов одни и те же, а стилистика
 подбирается под проект: цвет, нейтрали, скругления, плотность, тени и шрифт
 задаются CSS-переменными.
@@ -17,7 +17,7 @@ UI-kit на Vue 3 со сменными темами оформления, св�
 ```bash
 npm install @krometra/ui-kit
 # или из репозитория (скрипт `prepare` собирает `dist/`)
-npm install github:krometra/ui-kit#v0.6.1
+npm install github:krometra/ui-kit#v0.7.0
 ```
 
 Публикация в npm происходит по тегу `v*`, если задан секрет `NPM_TOKEN`.
@@ -71,14 +71,18 @@ const stop = applyTheme({ scheme: 'system' })           // следовать з
 
 | Ось | Значения |
 |---|---|
-| `preset` | `default`, `scanflow`, `slate`, `ocean`, `forest`, `violet`, `amber`, `rose`, `mono` |
+| `preset` | `default`, `scanflow`, `slate`, `ocean`, `forest`, `violet`, `amber`, `rose`, `mono`, `blocky` |
 | `scheme` | `light`, `dark`, `system` |
 | `neutral` | `cool`, `warm`, `plain` |
-| `radius` | `sharp`, `subtle`, `default`, `soft`, `pill` |
+| `radius` | `square`, `sharp`, `subtle`, `default`, `soft`, `pill` |
 | `density` | `compact`, `default`, `comfortable` |
-| `elevation` | `flat`, `default`, `lifted` |
-| `font` | `system`, `grotesk`, `serif`, `mono` или своя строка |
+| `elevation` | `flat`, `default`, `lifted`, `hard` |
+| `font` | `system`, `grotesk`, `serif`, `mono`, `rounded` или своя строка |
 | `bg`, `surface`, `text`, `textMuted`, `textFaint` | свой цвет фона, поверхности и текста поверх нейтральной палитры (hex) |
+
+Пресет может принести свои скругления, плотность, тени и шрифт: `blocky` сразу
+включает `radius: 'square'`, `elevation: 'hard'` и `font: 'rounded'`. Ось,
+заданная в теме явно, важнее пресета.
 
 Не заданные оси наследуются из `tokens.css`, поэтому частичная тема — обычный
 способ настройки. `applyTheme` выставляет `data-k-scheme` и `color-scheme` на
@@ -186,6 +190,17 @@ yarn tokens       # перегенерировать src/tokens.css из theme.j
 
 Витрина живёт в `demo/Showcase.vue` и служит и документацией, и площадкой для
 визуальной проверки при изменении токенов.
+
+## Что изменилось в 0.7.0
+
+- Тема `blocky` - мультяшная «блочная»: травяной акцент, земляные нейтрали,
+  прямые углы и жёсткие тени без размытия, в светлой и тёмной схеме.
+- Новые значения осей: `radius: 'square'` (без скруглений), `elevation: 'hard'`
+  (тень-ступенька), `font: 'rounded'` (скруглённый шрифт; в Chromium нужен
+  подключённый Nunito, `ui-rounded` понимает только Safari).
+- Пресет может задавать `radius`, `density`, `elevation` и `font`; ось, заданная
+  в теме явно, важнее. Существующие пресеты эти оси не задают и не изменились.
+- Витрина: выбор пресета подтягивает его оси в конструктор.
 
 ## Что изменилось в 0.6.1
 
